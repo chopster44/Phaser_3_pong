@@ -1,0 +1,189 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Pong</title>
+    <script src="./phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 5;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    var config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        backgroundColour: '#000000',
+        pixelArt: true,
+        physics: {
+            default : 'arcade',
+            arcade: {
+                debug: false
+            }
+        },
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var player1;
+    var player11;
+    var player12;
+    var player1score = 0;
+    var player1scoret;
+    var player2;
+    var player21;
+    var player22;
+    var player2score = 0;
+    var player2scoret;
+    var ball;
+    var levelDone = false;
+    var edges;
+    var edge1;
+    var edge2;
+    var edge3;
+    var edge4;
+    var center;
+    var game = new Phaser.Game(config);
+   
+    
+
+    function preload ()
+    {
+        this.load.image('ball', './Assets/Ball.png');
+        this.load.image('player', './Assets/Bar.png');
+        this.load.image('edgea', './Assets/Background1.png');
+        this.load.image('edgeb', './Assets/Background4.png');
+        this.load.image('spli', './Assets/Bar.png');
+    }
+
+    function create ()
+    {
+        player11 = this.physics.add.sprite(50, 268, 'player').setImmovable();
+        player12 = this.physics.add.sprite(50, 332, 'player').setImmovable();
+        player21 = this.physics.add.sprite(750, 268, 'player').setImmovable();
+        player22 = this.physics.add.sprite(750, 332, 'player').setImmovable();
+        player2 = player21, player22;
+        player1 = player11, player12;
+
+        ball = this.physics.add.sprite(400, 300, 'ball').setScale(2).refreshBody();
+        
+        edge1 = this.physics.add.sprite(400, 1, 'edgea').setImmovable().refreshBody();        
+        edge2 = this.physics.add.sprite(400, 599, 'edgea').setImmovable().refreshBody();   
+        edge3 = this.physics.add.sprite(1, 300, 'edgeb').setImmovable().refreshBody();
+        edge4 = this.physics.add.sprite(799, 300, 'edgeb').setImmovable().refreshBody();
+        edges = edge1, edge2;
+        
+        center = this.physics.add.staticGroup();
+        center.create(400, 300, 'spli');
+        center.create(400, 364, 'spli');
+        center.create(400, 428, 'spli');
+        center.create(400, 236, 'spli');
+
+        this.physics.add.collider(player21, player22);
+        this.physics.add.collider(player11, player12);
+        player11.setCollideWorldBounds();
+        player12.setCollideWorldBounds();
+        player21.setCollideWorldBounds();
+        player22.setCollideWorldBounds();
+        ball.setBounce(0);
+        ball.setVelocityX(-400);
+
+        cursors = this.input.keyboard.createCursorKeys();
+        keyW = this.input.keyboard.addKey('W');
+        keyS = this.input.keyboard.addKey('S'); 
+
+        player1scoret = this.add.text(332, 100, '0', { fontSize: '32px', fill: '#FFFFFF' });
+        player2scoret = this.add.text(432, 100, '0', { fontSize: '32px', fill: '#FFFFFF' });
+
+    }
+
+    function update ()
+    {
+        edges.setVelocity(0, 0);
+        player11.setVelocityX(0);
+        player12.setVelocityX(0);
+        player21.setVelocityX(0);
+        player22.setVelocityX(0);
+
+        //right hand player controls
+        if (cursors.up.isDown) {
+            player21.setVelocityY(-200);
+            player22.setVelocityY(-200);
+        }
+        else if (cursors.down.isDown){
+            player21.setVelocityY(200);
+            player22.setVelocityY(200);
+        }
+        else {
+            player21.setVelocityY(0);
+            player22.setVelocityY(0);
+        }
+
+        //left hend player controls
+        if (keyW.isDown){
+            player11.setVelocityY(-200);
+            player12.setVelocityY(-200);
+        }
+        else if (keyS.isDown){
+            player11.setVelocityY(200);
+            player12.setVelocityY(200);
+        }
+        else {
+            player11.setVelocityY(0);
+            player12.setVelocityY(0);
+        }
+
+        //right hand player ball collisions
+        if (this.physics.collide(ball, player21)) {
+            ball.setVelocityX(-400);
+            ball.setVelocityY(-45);
+        }
+        else if (this.physics.collide(ball, player22)) {
+            ball.setVelocityX(-300);
+            ball.setVelocityY(45);
+        }
+
+        //left hand player ball collisions
+        if (this.physics.collide(ball, player11)) {
+            ball.setVelocityX(400);
+            ball.setVelocityY(-45);
+        }
+        else if (this.physics.collide(ball, player12)) {
+            ball.setVelocityX(400);
+            ball.setVelocityY(45);
+        }
+        
+        //top and bottom collisions
+        if (this.physics.collide(ball, edge1)){
+            ball.setVelocityY(45);
+        }
+        else if (this.physics.collide(ball, edge2)){
+            ball.setVelocityY(-45);
+        }
+        
+        if (this.physics.collide(ball, edge3)) {
+            player2score += 1;
+            player2scoret.setText(player2score);
+            ball.setPosition(400, 300);
+            ball.setVelocityX(-400);
+        }
+        else if (this.physics.collide(ball, edge4)) {
+            player1score += 1;
+            player1scoret.setText(player1score);
+            ball.setPosition(400, 300);
+            ball.setVelocityX(400);
+        }
+    }
+
+</script>
+
+</body>
+</html>
