@@ -181,6 +181,40 @@
             ball.setPosition(400, 300);
             ball.setVelocityX(400);
         }
+
+        if (this.physics.collide(player11, edge1)) {
+            player11.setVelocityX(0);
+            player12.setVelocityX(0);
+        }
+        else if (this.physics.collide(player12, edge1)) {
+            player11.setVelocityX(0);
+            player12.setVelocityX(0);
+        }
+        else if (this.physics.collide(player11, edge2)) {
+            player11.setVelocityX(0);
+            player12.setVelocityX(0);
+        }
+        else if (this.physics.collide(player12, edge2)) {
+            player11.setVelocityX(0);
+            player12.setVelocityX(0);
+        }
+
+        if (this.physics.collide(player21, edge1)) {
+            player21.setVelocityX(0);
+            player22.setVelocityX(0);
+        }
+        else if (this.physics.collide(player22, edge1)) {
+            player21.setVelocityX(0);
+            player22.setVelocityX(0);
+        }
+        else if (this.physics.collide(player21, edge2)) {
+            player21.setVelocityX(0);
+            player22.setVelocityX(0);
+        }
+        else if (this.physics.collide(player22, edge2)) {
+            player21.setVelocityX(0);
+            player22.setVelocityX(0);
+        }
     }
 
 </script>
