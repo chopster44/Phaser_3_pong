@@ -23,7 +23,7 @@
         physics: {
             default : 'arcade',
             arcade: {
-                debug: false
+                debug: true
             }
         },
         scene: {
@@ -66,12 +66,8 @@
 
     function create ()
     {
-        player11 = this.physics.add.sprite(50, 268, 'player').setImmovable();
-        player12 = this.physics.add.sprite(50, 332, 'player').setImmovable();
-        player21 = this.physics.add.sprite(750, 268, 'player').setImmovable();
-        player22 = this.physics.add.sprite(750, 332, 'player').setImmovable();
-        player2 = player21, player22;
-        player1 = player11, player12;
+        player1 = this.physics.add.sprite(50, 268, 'player').setPushable(false);
+        player2 = this.physics.add.sprite(750, 268, 'player').setPushable(false);
 
         ball = this.physics.add.sprite(400, 300, 'ball').setScale(2).refreshBody();
         
@@ -87,13 +83,10 @@
         center.create(400, 428, 'spli');
         center.create(400, 236, 'spli');
 
-        this.physics.add.collider(player21, player22);
-        this.physics.add.collider(player11, player12);
-        player11.setCollideWorldBounds();
-        player12.setCollideWorldBounds();
-        player21.setCollideWorldBounds();
-        player22.setCollideWorldBounds();
-        ball.setBounce(0);
+        player1.setCollideWorldBounds();
+        player2.setCollideWorldBounds();
+        this.physics.add.collider(player1, ball);
+        this.physics.add.collider(player2, ball);
         ball.setVelocityX(-400);
 
         cursors = this.input.keyboard.createCursorKeys();
@@ -108,57 +101,55 @@
     function update ()
     {
         edges.setVelocity(0, 0);
-        player11.setVelocityX(0);
-        player12.setVelocityX(0);
-        player21.setVelocityX(0);
-        player22.setVelocityX(0);
 
         //right hand player controls
         if (cursors.up.isDown) {
-            player21.setVelocityY(-200);
-            player22.setVelocityY(-200);
+            player2.setVelocityY(-200);
         }
         else if (cursors.down.isDown){
-            player21.setVelocityY(200);
-            player22.setVelocityY(200);
+            player2.setVelocityY(200);
         }
         else {
-            player21.setVelocityY(0);
-            player22.setVelocityY(0);
+            player2.setVelocityY(0);
         }
 
         //left hend player controls
         if (keyW.isDown){
-            player11.setVelocityY(-200);
-            player12.setVelocityY(-200);
+            player1.setVelocityY(-200);
         }
         else if (keyS.isDown){
-            player11.setVelocityY(200);
-            player12.setVelocityY(200);
+            player1.setVelocityY(200);
         }
         else {
-            player11.setVelocityY(0);
-            player12.setVelocityY(0);
+            player1.setVelocityY(0);
         }
 
         //right hand player ball collisions
-        if (this.physics.collide(ball, player21)) {
+        if (this.physics.collide(ball, player2) && cursors.up.isDown) {
             ball.setVelocityX(-400);
             ball.setVelocityY(-45);
         }
-        else if (this.physics.collide(ball, player22)) {
-            ball.setVelocityX(-300);
+        else if (this.physics.collide(ball, player2) && cursors.down.isDown ) {
+            ball.setVelocityX(-400);
             ball.setVelocityY(45);
+        }
+        else if (this.physics.collide(ball, player2)){
+            ball.setVelocityX(-400);
+            
         }
 
         //left hand player ball collisions
-        if (this.physics.collide(ball, player11)) {
+        if (this.physics.collide(ball, player1) && keyW.isDown) {
             ball.setVelocityX(400);
             ball.setVelocityY(-45);
         }
-        else if (this.physics.collide(ball, player12)) {
+        else if (this.physics.collide(ball, player1) && keyS.isDown) {
             ball.setVelocityX(400);
             ball.setVelocityY(45);
+        }
+        else if (this.physics.collide(ball, player1)){
+            ball.setVelocityX(400);
+            console.log('collided');
         }
         
         //top and bottom collisions
@@ -182,39 +173,6 @@
             ball.setVelocityX(400);
         }
 
-        if (this.physics.collide(player11, edge1)) {
-            player11.setVelocityX(0);
-            player12.setVelocityX(0);
-        }
-        else if (this.physics.collide(player12, edge1)) {
-            player11.setVelocityX(0);
-            player12.setVelocityX(0);
-        }
-        else if (this.physics.collide(player11, edge2)) {
-            player11.setVelocityX(0);
-            player12.setVelocityX(0);
-        }
-        else if (this.physics.collide(player12, edge2)) {
-            player11.setVelocityX(0);
-            player12.setVelocityX(0);
-        }
-
-        if (this.physics.collide(player21, edge1)) {
-            player21.setVelocityX(0);
-            player22.setVelocityX(0);
-        }
-        else if (this.physics.collide(player22, edge1)) {
-            player21.setVelocityX(0);
-            player22.setVelocityX(0);
-        }
-        else if (this.physics.collide(player21, edge2)) {
-            player21.setVelocityX(0);
-            player22.setVelocityX(0);
-        }
-        else if (this.physics.collide(player22, edge2)) {
-            player21.setVelocityX(0);
-            player22.setVelocityX(0);
-        }
     }
 
 </script>
