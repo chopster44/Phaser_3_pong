@@ -23,7 +23,7 @@
         physics: {
             default : 'arcade',
             arcade: {
-                debug: true
+                debug: false
             }
         },
         scene: {
@@ -34,9 +34,11 @@
     };
 
     var player1;
+    var player1c;
     var player1score = 0;
     var player1scoret;
     var player2;
+    var player2c;
     var player2score = 0;
     var player2scoret;
     var ball;
@@ -67,10 +69,10 @@
 
         ball = this.physics.add.sprite(400, 300, 'ball').setScale(2).refreshBody();
         
-        edge1 = this.physics.add.sprite(400, 1, 'edgea').setImmovable().refreshBody();        
-        edge2 = this.physics.add.sprite(400, 599, 'edgea').setImmovable().refreshBody();   
-        edge3 = this.physics.add.sprite(1, 300, 'edgeb').setImmovable().refreshBody();
-        edge4 = this.physics.add.sprite(799, 300, 'edgeb').setImmovable().refreshBody();
+        edge1 = this.physics.add.sprite(400, 0, 'edgea').setImmovable().refreshBody();        
+        edge2 = this.physics.add.sprite(400, 600, 'edgea').setImmovable().refreshBody();   
+        edge3 = this.physics.add.sprite(0, 300, 'edgeb').setImmovable().refreshBody();
+        edge4 = this.physics.add.sprite(800, 300, 'edgeb').setImmovable().refreshBody();
         edges = edge1, edge2;
         
         center = this.physics.add.staticGroup();
@@ -91,7 +93,11 @@
 
         player1scoret = this.add.text(332, 100, '0', { fontSize: '32px', fill: '#FFFFFF' });
         player2scoret = this.add.text(432, 100, '0', { fontSize: '32px', fill: '#FFFFFF' });
+        player1c = this.add.text(50, 500, '0', { fontSize: '16px', fill: '#ffffff'});
+        player2c = this.add.text(500, 500, '0', { fontSize: '16px', fill: '#ffffff'});
 
+        player1c.setText("Use W and S to move!");
+        player2c.setText("Use Up and down keys to move!");
     }
 
     function update ()
@@ -101,9 +107,11 @@
         //right hand player controls
         if (cursors.up.isDown) {
             player2.setVelocityY(-200);
+            player2c.setText();
         }
         else if (cursors.down.isDown){
             player2.setVelocityY(200);
+            player2c.setText();
         }
         else {
             player2.setVelocityY(0);
@@ -112,9 +120,11 @@
         //left hend player controls
         if (keyW.isDown){
             player1.setVelocityY(-200);
+            player1c.setText();
         }
         else if (keyS.isDown){
             player1.setVelocityY(200);
+            player1c.setText();
         }
         else {
             player1.setVelocityY(0);
@@ -171,6 +181,29 @@
             ball.setPosition(400, 300);
             ball.setVelocityX(400);
             ball.setVelocityY(0);
+        }
+
+        if (player1score == 10){
+            player1.setVelocity(0, 0);
+            player1.setPosition(50, 268);
+            player2.setVelocity(0, 0);
+            player2.setPosition(750, 268);
+            ball.setVelocity(0, 0);
+            ball.setPosition(500, 300);
+            player1scoret.setPosition(100, 300);
+            player1scoret.setText("Player 1 wins!");
+            player2scoret.setText();
+        }
+        else if (player2score == 10){
+            player1.setVelocity(0, 0);
+            player1.setPosition(50, 268);
+            player2.setVelocity(0, 0);
+            player2.setPosition(750, 268);
+            ball.setVelocity(0, 0);
+            ball.setPosition(100, 300);
+            player2scoret.setPosition(500, 300);
+            player2scoret.setText("Player 2 wins!");
+            player1scoret.setText();
         }
 
     }
