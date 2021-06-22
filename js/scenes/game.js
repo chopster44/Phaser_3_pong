@@ -30,8 +30,8 @@ gameScene.preload = function()
 
 gameScene.create =function()
 {
-    player1 = this.physics.add.sprite(50, 268, 'player').setPushable(false);
-    player2 = this.physics.add.sprite(750, 268, 'player').setPushable(false);
+    player1 = this.physics.add.sprite(50, 200, 'player').setPushable(false);
+    player2 = this.physics.add.sprite(750, 200, 'player').setPushable(false);
 
     ball = this.physics.add.sprite(400, 300, 'ball').setScale(2).refreshBody();
     
@@ -149,26 +149,10 @@ gameScene.update =function()
     }
 
     if (player1score == 10){
-        player1.setVelocity(0, 0);
-        player1.setPosition(50, 268);
-        player2.setVelocity(0, 0);
-        player2.setPosition(750, 268);
-        ball.setVelocity(0, 0);
-        ball.setPosition(500, 300);
-        player1scoret.setPosition(100, 300);
-        player1scoret.setText("Player 1 wins!");
-        player2scoret.setText();
+        this.scene.start('P1W');
     }
     else if (player2score == 10){
-        player1.setVelocity(0, 0);
-        player1.setPosition(50, 268);
-        player2.setVelocity(0, 0);
-        player2.setPosition(750, 268);
-        ball.setVelocity(0, 0);
-        ball.setPosition(100, 300);
-        player2scoret.setPosition(500, 300);
-        player2scoret.setText("Player 2 wins!");
-        player1scoret.setText();
+        this.scene.start('P2W');
     }
 
 }

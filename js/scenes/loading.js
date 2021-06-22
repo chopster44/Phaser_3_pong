@@ -19,6 +19,8 @@ loadingScene.create = function()
         repeat: -1
     });
 
+    space = this.input.keyboard.addKey('SPACE');
+
 }
 
 loadingScene.update = function()
@@ -32,5 +34,9 @@ loadingScene.update = function()
     }
     else {
         run += 1;
+    }
+
+    if (space.isDown){
+        this.scene.start('Game');
     }
 }
