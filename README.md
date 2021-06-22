@@ -8,6 +8,6 @@ The controls for the player on the left side of the screen are: W to go up and S
 The controls for the player on the right side of the screen are: Up arrow key and down arrow key.
 
 Current known Bugs:
-Putting a paddle too close to a side causes it to shrik in half.
+
 
 If you find anymore bugs during use of the game please tell me!
