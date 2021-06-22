@@ -2,7 +2,7 @@ let config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    scene: [gameScene],
+    scene: [loadingScene, startScene, gameScene],
     backgroundColour: '#000000',
     pixelArt: true,
     physics: {
@@ -13,4 +13,4 @@ let config = {
     }
 };
 
-var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
