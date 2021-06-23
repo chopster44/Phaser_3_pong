@@ -6,7 +6,7 @@ var space;
 
 startScene.preload = function()
 {
-    this.load.image('PONG', '../Assets/Bar-copy.png');
+    this.load.image('PONG', './assets/Bar-copy.png');
 }
 startScene.create = function()
 {

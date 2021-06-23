@@ -5,7 +5,7 @@ var run = 0;
 
 loadingScene.preload = function()
 {
-    this.load.spritesheet('loading', '../Assets/bar-copy-export.png', { frameWidth: 32, frameHeight: 16});
+    this.load.spritesheet('loading', './assets/Bar-copy-export.png', { frameWidth: 32, frameHeight: 16});
 }
 
 loadingScene.create = function()

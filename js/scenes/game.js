@@ -21,11 +21,11 @@ var center;
 
 gameScene.preload = function()
 {
-    this.load.image('ball', './Assets/Ball.png');
-    this.load.image('player', './Assets/Bar.png');
-    this.load.image('edgea', './Assets/Background1.png');
-    this.load.image('edgeb', './Assets/Background4.png');
-    this.load.image('spli', './Assets/Bar.png');
+    this.load.image('ball', './assets/Ball.png');
+    this.load.image('player', './assets/Bar.png');
+    this.load.image('edgea', './assets/Background1.png');
+    this.load.image('edgeb', './assets/Background4.png');
+    this.load.image('spli', './assets/Bar.png');
 }
 
 gameScene.create =function()

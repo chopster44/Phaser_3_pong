@@ -13,9 +13,9 @@ var center;
 
 p1wScene.preload = function()
 {
-    this.load.image('ball', './Assets/Ball.png');
-    this.load.image('player', './Assets/Bar.png');
-    this.load.image('spli', './Assets/Bar.png');
+    this.load.image('ball', './assets/Ball.png');
+    this.load.image('player', './assets/Bar.png');
+    this.load.image('spli', './assets/Bar.png');
 }
 
 p1wScene.create =function()
