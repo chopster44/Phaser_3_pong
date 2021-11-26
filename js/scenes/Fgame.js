@@ -19,7 +19,7 @@ var center;
 
 
 
-gameScene.preload = function()
+gameFScene.preload = function()
 {
     this.load.image('ball', './assets/Ball.png');
     this.load.image('player', './assets/Bar.png');
@@ -28,7 +28,7 @@ gameScene.preload = function()
     this.load.image('spli', './assets/Bar.png');
 }
 
-gameScene.create = function()
+gameFScene.create = function()
 {
     player1 = this.physics.add.sprite(50, 200, 'player').setPushable(false);
     player2 = this.physics.add.sprite(750, 200, 'player').setPushable(false);
@@ -66,7 +66,7 @@ gameScene.create = function()
     player2c.setText("Use Up and down keys to move!");
 }
 
-gameScene.update = function()
+gameFScene.update = function()
 {
     edges.setVelocity(0, 0);
 
