@@ -67,7 +67,8 @@ gameScene.create =function()
 }
 
 gameScene.update =function()
-{
+{   
+    //change this to change each edge seperately.
     edges.setVelocity(0, 0);
 
     //right hand player controls
