@@ -37,6 +37,6 @@ loadingScene.update = function()
     }
 
     if (space.isDown){
-        this.scene.start('Game');
+        this.scene.start('Start');
     }
 }
