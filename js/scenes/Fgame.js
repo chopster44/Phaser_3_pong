@@ -51,7 +51,7 @@ gameFScene.create = function()
     player2.setCollideWorldBounds();
     //this.physics.add.collider(player1, ball);
     //this.physics.add.collider(player2, ball);
-    ball.setVelocityX(-400);
+    ball.setVelocityX(-600);
 
     cursors = this.input.keyboard.createCursorKeys();
     keyW = this.input.keyboard.addKey('W');
@@ -72,11 +72,11 @@ gameFScene.update = function()
 
     //right hand player controls
     if (cursors.up.isDown) {
-        player2.setVelocityY(-200);
+        player2.setVelocityY(-500);
         player2c.setText();
     }
     else if (cursors.down.isDown){
-        player2.setVelocityY(200);
+        player2.setVelocityY(500);
         player2c.setText();
     }
     else {
@@ -85,11 +85,11 @@ gameFScene.update = function()
 
     //left hend player controls
     if (keyW.isDown){
-        player1.setVelocityY(-200);
+        player1.setVelocityY(-500);
         player1c.setText();
     }
     else if (keyS.isDown){
-        player1.setVelocityY(200);
+        player1.setVelocityY(500);
         player1c.setText();
     }
     else {
@@ -100,37 +100,37 @@ gameFScene.update = function()
     var collisiond2 = this.physics.collide(ball, player2);
     
     if (collisiond2 && cursors.up.isDown) {
-        ball.setVelocityX(-400);
-        ball.setVelocityY(-45);
+        ball.setVelocityX(-600);
+        ball.setVelocityY(-80);
     }
     else if (collisiond2 && cursors.down.isDown) {
-        ball.setVelocityX(-400);
-        ball.setVelocityY(45);
+        ball.setVelocityX(-600);
+        ball.setVelocityY(80);
     }
     else if (collisiond2){
-        ball.setVelocityX(-400);
+        ball.setVelocityX(-600);
         
     }
         var collisiond = this.physics.collide(ball, player1);
     //left hand player ball collisions
     if (collisiond && keyS.isDown) {
-        ball.setVelocityX(400);
-        ball.setVelocityY(45);
+        ball.setVelocityX(600);
+        ball.setVelocityY(80);
     }
     else if (collisiond && keyW.isDown) {
-        ball.setVelocityX(400);
-        ball.setVelocityY(-45);
+        ball.setVelocityX(600);
+        ball.setVelocityY(-80);
     }
     else if (collisiond){
-        ball.setVelocityX(400);
+        ball.setVelocityX(600);
     }
     
     //top and bottom collisions
     if (this.physics.collide(ball, edge1)){
-        ball.setVelocityY(45);
+        ball.setVelocityY(80);
     }
     else if (this.physics.collide(ball, edge2)){
-        ball.setVelocityY(-45);
+        ball.setVelocityY(-80);
     }
     
     if (this.physics.collide(ball, edge3)) {
