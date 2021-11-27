@@ -8,10 +8,10 @@ var levelDone = false;
 var edge1, edge2, edge3, edge4;
 var center;
 var cursors, keyW, keyS;
-export class gameScene extends Phaser.Scene {
+export class gameFScene extends Phaser.Scene {
     constructor() {
         super({
-            key: "Game"
+            key: "FGame"
         });
     }
     
@@ -134,7 +134,7 @@ export class gameScene extends Phaser.Scene {
             ball.setPosition(400, 250);
             ball.setVelocity(-400, 0);
         }
-        else if (this.physics.collide(ball, edge3)) {
+        else if (this.physics.collide(ball, edge4)) {
             player1score +=1;
             player1scoret.setText(player2score);
             ball.setPosition(400, 250);

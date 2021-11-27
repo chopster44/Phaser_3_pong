@@ -21,7 +21,7 @@ export class startScene extends Phaser.Scene {
             this.scene.start('Game');
         }
         else if (f.isDown) {
-            this.scene.start('Fgame')
+            this.scene.start('FGame')
         }
     }
 }
