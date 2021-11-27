@@ -69,11 +69,11 @@ export class gameScene extends Phaser.Scene {
 
         //right hand play controls
         if (cursors.up.isDown) {
-            player2.setVelocityY(-200);
+            player2.setVelocityY(-300);
             player2c.setText();
         }
         else if (cursors.down.isDown) {
-            player2.setVelocityY(200);
+            player2.setVelocityY(300);
             player2c.setText();
         }
         else {
@@ -82,11 +82,11 @@ export class gameScene extends Phaser.Scene {
 
         //left hand player controls
         if (keyW.isDown) {
-            player1.setVelocityY(-200);
+            player1.setVelocityY(-300);
             player1c.setText();
         }
         else if (keyS.isDown) {
-            player1.setVelocityY(200);
+            player1.setVelocityY(300);
             player1c.setText();
         }
         else {

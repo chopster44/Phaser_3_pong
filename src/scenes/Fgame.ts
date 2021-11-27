@@ -136,7 +136,7 @@ export class gameFScene extends Phaser.Scene {
         }
         else if (this.physics.collide(ball, edge4)) {
             player1score +=1;
-            player1scoret.setText(player2score);
+            player1scoret.setText(player1score);
             ball.setPosition(400, 250);
             ball.setVelocity(400, 0);
         };
