@@ -1,4 +1,13 @@
 import "phaser"; 
+var player1, player1c, player1scoret;
+var player1score = 0;
+var player2, player2c, player2scoret;
+var player2score = 0;
+var ball;
+var levelDone = false;
+var edge1, edge2, edge3, edge4;
+var center;
+var cursors, keyW, keyS;
 export class gameScene extends Phaser.Scene {
     constructor() {
         super({
@@ -6,9 +15,6 @@ export class gameScene extends Phaser.Scene {
         });
     }
     
-    init(params): void {
-        var player1;
-    }
     preload(): void {
         //get all assets
         this.load.image('ball', '../assets/Ball.png');
@@ -20,19 +26,19 @@ export class gameScene extends Phaser.Scene {
     create(): void {
         //create player sprite
         player1 = this.physics.add.sprite(50, 200, 'player').setPushable(false);
-        var player2 = this.physics.add.sprite(750, 200, 'player').setPushable(false);
+        player2 = this.physics.add.sprite(750, 200, 'player').setPushable(false);
 
         //create ball sprite
-        var ball = this.physics.add.sprite(400, 225, 'ball').setScale(2).refreshBody();
+        ball = this.physics.add.sprite(400, 225, 'ball').setScale(2).refreshBody();
 
         //create borders
-        let edge1 = this.physics.add.sprite(400, 0, 'edgea').setImmovable(true).refreshBody();
-        const edge2 = this.physics.add.sprite(400, 600, 'edgea').setImmovable(true).refreshBody();
-        const edge3 = this.physics.add.sprite(0, 300, 'edgeb').setImmovable(true).refreshBody();
-        const edge4 = this.physics.add.sprite(800, 300, 'edgeb').setImmovable(true).refreshBody();
+        edge1 = this.physics.add.sprite(400, 0, 'edgea').setImmovable(true).refreshBody();
+        edge2 = this.physics.add.sprite(400, 600, 'edgea').setImmovable(true).refreshBody();
+        edge3 = this.physics.add.sprite(0, 300, 'edgeb').setImmovable(true).refreshBody();
+        edge4 = this.physics.add.sprite(800, 300, 'edgeb').setImmovable(true).refreshBody();
 
         //create central split
-        var center = this.physics.add.staticGroup();
+        center = this.physics.add.staticGroup();
         center.create(400, 236, 'spli');
         center.create(400, 300, 'spli');
         center.create(400, 364, 'spli');
@@ -46,16 +52,101 @@ export class gameScene extends Phaser.Scene {
         ball.setVelocityX(-300);
 
         //create key inputs
-        var cursors = this.input.keyboard.createCursorKeys();
-        var keyW = this.input.keyboard.addKey('W');
-        var keyS = this.input.keyboard.addKey('S');
+        cursors = this.input.keyboard.createCursorKeys();
+        keyW = this.input.keyboard.addKey('W');
+        keyS = this.input.keyboard.addKey('S');
 
         //add text
-        var player1scoret = this.add.text(332, 100, '0', { fontSize: '32px', color: '#FFFFFF'});
-        var player2scoret = this.add.text(432, 100, '0', { fontSize: '32px', color: '#FFFFFF'});
-        var player1c = this.add.text(50, 500, 'Use W and S to move!', { fontSize: '16px', color: '#FFFFFF'});
-        var player2c = this.add.text(500, 500, 'Use Up and Down keys to move!', { fontSize: '16px', color: '#FFFFFF'});
+        player1scoret = this.add.text(332, 100, '0', { fontSize: '32px', color: '#FFFFFF'});
+        player2scoret = this.add.text(432, 100, '0', { fontSize: '32px', color: '#FFFFFF'});
+        player1c = this.add.text(50, 500, 'Use W and S to move!', { fontSize: '16px', color: '#FFFFFF'});
+        player2c = this.add.text(500, 500, 'Use Up and Down keys to move!', { fontSize: '16px', color: '#FFFFFF'});
     }
     update(time): void {
+        //stop the edges from floating about
+        edge1.setVelocity(0, 0);
+        edge2.setVelocity(0, 0);
+
+        //right hand play controls
+        if (cursors.up.isDown) {
+            player2.setVelocityY(-200);
+            player2c.setText();
+        }
+        else if (cursors.down.isDown) {
+            player2.setVelocityY(200);
+            player2c.setText();
+        }
+        else {
+            player2.setVelocityY(0);
+        };
+
+        //left hand player controls
+        if (keyW.isDown) {
+            player1.setVelocityY(-200);
+            player1c.setText();
+        }
+        else if (keyS.isDown) {
+            player1.setVelocityY(200);
+            player1c.setText();
+        }
+        else {
+            player1.setVelocity(0, 0)
+        };
+
+        //right hand player collisions
+        var collisiond = this.physics.collide(ball, player2);
+
+        if (collisiond && cursors.up.isDown) {
+            ball.setVelocity(-400, -45);
+        }
+        else if (collisiond && cursors.up.isDown) {
+            ball.setVelocity(-400, 45);
+        }
+        else if (collisiond) {
+            ball.setVelocity(-400);
+        };
+
+        //left hand player collisions
+        var collisiond2 = this.physics.collide(ball, player1);
+
+        if (collisiond2 && keyW.isDown) {
+            ball.setVelocity(400, -45);
+        }
+        else if (collisiond2 && keyS.isDown) {
+            ball.setVelocity(400, 45);
+        }
+        else if (collisiond2) {
+            ball.setVelocity(400);
+        };
+
+        //top and bottom collisions
+        if (this.physics.collide(ball, edge1)) {
+            ball.setVelocityY(45);
+        }
+        else if (this.physics.collide(ball, edge2)) {
+            ball.setVelocityY(-45);
+        };
+
+        //points
+        if (this.physics.collide(ball, edge3)) {
+            player2score +=1;
+            player2scoret.setText(player2score);
+            ball.setPosition(400, 250);
+            ball.setVelocity(-400, 0);
+        }
+        else if (this.physics.collide(ball, edge3)) {
+            player1score +=1;
+            player1scoret.setText(player2score);
+            ball.setPosition(400, 250);
+            ball.setVelocity(400, 0);
+        };
+
+        //end game
+        if (player1score == 10) {
+            this.scene.start('P1W');
+        }
+        if (player2score == 10) {
+            this.scene.start('P2W');
+        }
     }
 }

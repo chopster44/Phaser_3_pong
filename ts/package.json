@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack --watch & live-server --port=3001"
+    "start": "webpack --watch & live-server --port=3000"
   },
   "author": "Chopster44",
   "license": "MIT",
   "devDependencies": {
+    "live-server": "^1.1.0",
     "phaser": "^3.55.2",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.2",
