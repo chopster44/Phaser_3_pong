@@ -1,2 +1,2 @@
 language = "nodejs"
-run = "serve"
+run = "run start"

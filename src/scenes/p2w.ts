@@ -31,7 +31,7 @@ export class p2wScene extends Phaser.Scene {
     }
     update(time): void {
         if (space.isDown) {
-            this.scene.start('Game');
+            this.scene.start('Start');
         };
     }
 }
