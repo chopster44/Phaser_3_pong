@@ -7,7 +7,7 @@ var ball;
 var levelDone = false;
 var edge1, edge2, edge3, edge4;
 var center;
-var cursors, keyW, keyS;
+var cursors, keyW, keyS, key1, key2;
 export class gameScene extends Phaser.Scene {
     constructor() {
         super({
@@ -55,6 +55,8 @@ export class gameScene extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         keyW = this.input.keyboard.addKey('W');
         keyS = this.input.keyboard.addKey('S');
+        key1 = this.input.keyboard.addKey('Q');
+        key2 = this.input.keyboard.addKey('E');
 
         //add text
         player1scoret = this.add.text(332, 100, '0', { fontSize: '32px', color: '#FFFFFF'});
@@ -80,6 +82,10 @@ export class gameScene extends Phaser.Scene {
             player2.setVelocityY(0);
         };
 
+        if (key1.isDown) {
+            this.scene.start('P1W');
+        };
+
         //left hand player controls
         if (keyW.isDown) {
             player1.setVelocityY(-300);
@@ -91,6 +97,10 @@ export class gameScene extends Phaser.Scene {
         }
         else {
             player1.setVelocity(0, 0)
+        };
+
+        if (key2.isDown) {
+            this.scene.start('P2W');
         };
 
         //right hand player collisions

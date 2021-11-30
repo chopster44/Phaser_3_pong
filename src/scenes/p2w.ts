@@ -26,7 +26,7 @@ export class p2wScene extends Phaser.Scene {
 
         space = this.input.keyboard.addKey('SPACE');
 
-        var player1scoret = this.add.text(100, 300, 'Press Space to play again!', { fontSize: '20px', color: '#FFFFFF' });
+        var player1scoret = this.add.text(60, 300, 'Press Space to play again!', { fontSize: '20px', color: '#FFFFFF' });
         var player2scoret = this.add.text(450, 300, 'Player 2 wins!', { fontSize: '20px', color: '#FFFFFF' });
     }
     update(time): void {
