@@ -1,6 +1,6 @@
 # Phaser_3_pong
 
-This is my remake of pong I made using Phaser.js! 
+This is my remake of pong I made using Phaser 3! 
 It currently does not run the best but I will do some slight updates in the future!
 It is local multiplayer for the moment.
 
