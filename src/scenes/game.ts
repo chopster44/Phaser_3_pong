@@ -154,9 +154,13 @@ export class gameScene extends Phaser.Scene {
         //end game
         if (player1score == 10) {
             this.scene.start('P1W');
-        }
+            player1score = 0;
+            player2score = 0;
+        };
         if (player2score == 10) {
             this.scene.start('P2W');
-        }
+            player1score = 0;
+            player2score = 0;
+        };
     }
 }
