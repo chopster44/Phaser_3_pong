@@ -1,2 +1,2 @@
-language = "html"
+language = "nodejs"
 run = "serve"
