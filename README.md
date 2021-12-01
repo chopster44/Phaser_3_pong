@@ -1,8 +1,10 @@
 # Phaser_3_pong
 
-This is my remake of pong I made using Phaser.js! 
-It currently does not run the best but I will do some slight updates in the future!
+This is my remake of pong I made using Phaser 3! 
+It currently does not run the best but I will do some updates in the future!
 It is local multiplayer for the moment.
+
+If you want to make an edit of it you will need to do an npm install.
 
 Follow this link to play it: https://chopster44.itch.io/pong-remake
 
